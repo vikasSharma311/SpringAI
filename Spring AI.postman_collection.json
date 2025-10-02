@@ -1,0 +1,219 @@
+{
+	"info": {
+		"_postman_id": "6147dbc5-630a-40a8-af5d-07c8c43f2f8f",
+		"name": "Spring AI",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "26363947"
+	},
+	"item": [
+		{
+			"name": "open Ai",
+			"item": [
+				{
+					"name": "simple Promt Joke example",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9091/api/chat?message=Tell me a joke?",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9091",
+							"path": [
+								"api",
+								"chat"
+							],
+							"query": [
+								{
+									"key": "message",
+									"value": "Tell me a joke?"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "simple Promt model name example",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9091/api/chat?message=Whats is your name and which model you are using ?",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9091",
+							"path": [
+								"api",
+								"chat"
+							],
+							"query": [
+								{
+									"key": "message",
+									"value": "Whats is your name and which model you are using ?"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Ollama",
+			"item": [
+				{
+					"name": "simple Promt model name example",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9092/api/chat?message=Whats%20is%20your%20name%20and%20which%20model%20you%20are%20using%20%3F",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9092",
+							"path": [
+								"api",
+								"chat"
+							],
+							"query": [
+								{
+									"key": "message",
+									"value": "Whats%20is%20your%20name%20and%20which%20model%20you%20are%20using%20%3F"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "DockerModel",
+			"item": [
+				{
+					"name": "simple Promt model name example",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9093/api/chat?message=Whats%20is%20your%20name%20and%20which%20model%20you%20are%20using%20%3F",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9093",
+							"path": [
+								"api",
+								"chat"
+							],
+							"query": [
+								{
+									"key": "message",
+									"value": "Whats%20is%20your%20name%20and%20which%20model%20you%20are%20using%20%3F"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Aws Bedrock",
+			"item": [
+				{
+					"name": "simple Promt model name example",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9094/api/chat?message=Whats%20is%20your%20name%20and%20which%20model%20you%20are%20using%20%3F",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9094",
+							"path": [
+								"api",
+								"chat"
+							],
+							"query": [
+								{
+									"key": "message",
+									"value": "Whats%20is%20your%20name%20and%20which%20model%20you%20are%20using%20%3F"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "MultiModel",
+			"item": [
+				{
+					"name": "open ai",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9095/api/openai/chat?message=Whats%20is%20your%20name%20and%20which%20model%20you%20are%20using%20%3F",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9095",
+							"path": [
+								"api",
+								"openai",
+								"chat"
+							],
+							"query": [
+								{
+									"key": "message",
+									"value": "Whats%20is%20your%20name%20and%20which%20model%20you%20are%20using%20%3F"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ollama",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9095/api/ollama/chat?message=Whats%20is%20your%20name%20and%20which%20model%20you%20are%20using%20%3F",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9095",
+							"path": [
+								"api",
+								"ollama",
+								"chat"
+							],
+							"query": [
+								{
+									"key": "message",
+									"value": "Whats%20is%20your%20name%20and%20which%20model%20you%20are%20using%20%3F"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
