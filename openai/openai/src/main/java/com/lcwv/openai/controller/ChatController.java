@@ -1,5 +1,6 @@
 package com.lcwv.openai.controller;
 
+import com.lcwv.openai.advisors.TokenUsageAuditAdvisor;
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,6 +20,7 @@ public class ChatController {
     public String chat(@RequestParam("message") String message) {
         return chatClient
                 .prompt()
+                //.advisors(new TokenUsageAuditAdvisor())
                 .system("""
                         You are an internal IT helpdesk assistant. Your role is to assist\s
                                                 employees with IT-related issues such as resetting passwords,\s
