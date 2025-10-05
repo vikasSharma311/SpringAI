@@ -1,6 +1,7 @@
 package com.lcwv.openai.config;
 
 import org.springframework.ai.chat.client.ChatClient;
+import org.springframework.ai.chat.client.advisor.SimpleLoggerAdvisor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -9,6 +10,7 @@ public class ChatClientConfig {
     @Bean
     public ChatClient chatClient(ChatClient.Builder chatClientBuilder){
         return chatClientBuilder
+                .defaultAdvisors(new SimpleLoggerAdvisor())
                 .defaultSystem("""
                         You are an HR Policy Assistant.
                                     You must ONLY answer questions related to HR, leave policies, or company policy.
