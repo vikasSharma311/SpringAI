@@ -6,12 +6,21 @@ A **Postman Collection** is also included for easy API testing.
 
 ---
 
-## 📂 Projects Included
+## 📂 Projects & Experiments Included
 
 ### 1️⃣ OpenAI (Default Chat Model in Spring AI)
 - Integrated GPT models with Spring Boot.  
 - OpenAI is the **default chat model supported by Spring AI**, making setup simple and quick.  
-- Perfect for cloud-based AI chat APIs.
+- Explored **ChatOptions** for global defaults and **OpenAiChatOptions** for per-endpoint overrides.  
+- Tested **prompt templates** (`userPromptTemplate.st`) for dynamic AI responses.  
+- Experimented with **prompt stuffing** using system templates (`systemPromptTemplate.st`) and explored limitations on injected prompts.  
+- Implemented **structured output handling**:  
+  - Single beans (`CountryCities`)  
+  - Lists of beans (`List<CountryCities>`) using `ParameterizedTypeReference`  
+  - Maps (`Map<String, Object>`)  
+  - Generic converters: `ListOutputConverter`, `MapOutputConverter`, `BeanOutputConverter`  
+- Added **custom advisor** (`TokenUsageAuditAdvisor`) for logging token usage metadata.  
+- Implemented **reactive streaming** (`Flux<String>`) for real-time AI responses.  
 
 ---
 
@@ -44,12 +53,10 @@ A **Postman Collection** is also included for easy API testing.
 ---
 
 ## ⚙️ Tech Stack
-- **Java 17+**
-- **Spring Boot 3.x**
-- **Spring AI**
-- **Maven**
-- **Docker** (for Gemma 3)
-- **AWS Bedrock** (for Gemini)
+- **Java 17+**  
+- **Spring Boot 3.x**  
+- **Spring AI**  
+- **Maven**  
+- **Docker** (for Gemma 3)  
+- **AWS Bedrock** (for Gemini)  
 - **Postman** (for API testing)
-
-
