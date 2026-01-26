@@ -15,6 +15,8 @@ public class TokenUsageAuditAdvisor implements CallAdvisor {
     private static final Logger logger = LoggerFactory.getLogger(TokenUsageAuditAdvisor.class);
     @Override
     public ChatClientResponse adviseCall(ChatClientRequest chatClientRequest, CallAdvisorChain callAdvisorChain) {
+        // Only focusing on the response because request doesn't contain token usage info.
+        // Token usage is determined after receiving the LLM response.
         ChatClientResponse chatClientResponse = callAdvisorChain.nextCall(chatClientRequest);
         ChatResponse chatResponse = chatClientResponse.chatResponse();
         if(chatResponse.getMetadata()!=null){
