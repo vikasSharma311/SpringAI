@@ -1,0 +1,17 @@
+services:
+  qdrant:
+    image: 'qdrant/qdrant:latest'  # Official Qdrant vector database image
+
+    ports:
+      - '6333:6333'  # REST API (HTTP)
+        # Used by applications to:
+        # - Insert vectors (embeddings)
+        # - Search vectors (similarity search)
+        # - Manage collections
+      # Example: http://localhost:6333
+
+      - '6334:6334'  # gRPC API
+        # High-performance API mainly for:
+        # - Faster ingestion
+        # - Large-scale vector operations
+      # - Internal / advanced client usage
