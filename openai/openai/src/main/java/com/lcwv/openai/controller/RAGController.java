@@ -46,11 +46,12 @@ public class RAGController {
     @GetMapping("/document/chat")
     public ResponseEntity<String> documnetChat(@RequestHeader("username") String username,
                                              @RequestParam("message") String message) {
-        SearchRequest searchRequest = SearchRequest.builder().query(message).topK(3).similarityThreshold(0.5).build();
-        List<Document> documents = vectorStore.similaritySearch(searchRequest);
-        String similarContext = documents.stream().map(Document::getText).collect(Collectors.joining(System.lineSeparator()));
-        String answer = chatClient.prompt().system( promptSystemSpec -> promptSystemSpec.text(hrPolicyTemplate)
-                        .param("documents", similarContext))
+//        SearchRequest searchRequest = SearchRequest.builder().query(message).topK(3).similarityThreshold(0.5).build();
+//        List<Document> documents = vectorStore.similaritySearch(searchRequest);
+//        String similarContext = documents.stream().map(Document::getText).collect(Collectors.joining(System.lineSeparator()));
+        String answer = chatClient.prompt()
+//                .system( promptSystemSpec -> promptSystemSpec.text(hrPolicyTemplate)
+//                        .param("documents", similarContext))
                 .advisors(advisorSpec -> advisorSpec.param(CONVERSATION_ID, username))
                 .user(message)
                 .call().content();
