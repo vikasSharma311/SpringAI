@@ -9,6 +9,7 @@ import org.springframework.ai.chat.memory.ChatMemory;
 import org.springframework.ai.chat.memory.MessageWindowChatMemory;
 import org.springframework.ai.chat.memory.repository.jdbc.JdbcChatMemoryRepository;
 import org.springframework.ai.rag.advisor.RetrievalAugmentationAdvisor;
+import org.springframework.ai.rag.preretrieval.query.transformation.TranslationQueryTransformer;
 import org.springframework.ai.rag.retrieval.search.VectorStoreDocumentRetriever;
 import org.springframework.ai.vectorstore.VectorStore;
 import org.springframework.context.annotation.Bean;
@@ -35,8 +36,11 @@ public class ChatMemoryChatClientConfig {
                 .build();
     }
     @Bean
-    public RetrievalAugmentationAdvisor retrievalAugmentationAdvisor(VectorStore vectorStore){
-      return  RetrievalAugmentationAdvisor.builder().documentRetriever(
+    public RetrievalAugmentationAdvisor retrievalAugmentationAdvisor(VectorStore vectorStore,ChatClient.Builder chatClientBuilder){
+      return  RetrievalAugmentationAdvisor.builder()
+              .queryTransformers(TranslationQueryTransformer.builder()
+                      .chatClientBuilder(chatClientBuilder.clone()).targetLanguage("english").build())
+              .documentRetriever(
                 VectorStoreDocumentRetriever.builder().topK(3)
                         .similarityThreshold(0.5)
                         .vectorStore(vectorStore).build()

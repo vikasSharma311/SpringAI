@@ -1,6 +1,5 @@
 package com.lcwv.openai.controller;
 
-import lombok.RequiredArgsConstructor;
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.document.Document;
 import org.springframework.ai.vectorstore.SearchRequest;
@@ -19,10 +18,14 @@ import static org.springframework.ai.chat.memory.ChatMemory.CONVERSATION_ID;
 @RequestMapping("/api/rag")
 public class RAGController {
     private final ChatClient chatClient;
+    private final ChatClient webSearchChatClient;
     private final VectorStore vectorStore;
 
-    public RAGController(@Qualifier("chatMemoryChatClient") ChatClient chatClient, VectorStore vectorStore) {
+    public RAGController(@Qualifier("chatMemoryChatClient") ChatClient chatClient,
+                         @Qualifier("WebSearchChatClient") ChatClient webSearchChatClient
+            , VectorStore vectorStore) {
         this.chatClient = chatClient;
+        this.webSearchChatClient = webSearchChatClient;
         this.vectorStore = vectorStore;
     }
     @Value("classpath:/promptTemplates/systemPromptRandomDataTemplate.st")
@@ -52,6 +55,17 @@ public class RAGController {
         String answer = chatClient.prompt()
 //                .system( promptSystemSpec -> promptSystemSpec.text(hrPolicyTemplate)
 //                        .param("documents", similarContext))
+                .advisors(advisorSpec -> advisorSpec.param(CONVERSATION_ID, username))
+                .user(message)
+                .call().content();
+        return ResponseEntity.ok(answer);
+
+    }
+
+    @GetMapping("/web-search/chat")
+    public ResponseEntity<String> webChat(@RequestHeader("username") String username,
+                                               @RequestParam("message") String message) {
+        String answer = webSearchChatClient.prompt()
                 .advisors(advisorSpec -> advisorSpec.param(CONVERSATION_ID, username))
                 .user(message)
                 .call().content();
