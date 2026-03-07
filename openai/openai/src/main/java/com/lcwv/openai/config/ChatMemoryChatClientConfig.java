@@ -1,6 +1,7 @@
 package com.lcwv.openai.config;
 
 import com.lcwv.openai.advisors.TokenUsageAuditAdvisor;
+import com.lcwv.openai.rag.PIIMaskingDocumentPostProcessor;
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.chat.client.advisor.MessageChatMemoryAdvisor;
 import org.springframework.ai.chat.client.advisor.SimpleLoggerAdvisor;
@@ -44,6 +45,8 @@ public class ChatMemoryChatClientConfig {
                 VectorStoreDocumentRetriever.builder().topK(3)
                         .similarityThreshold(0.5)
                         .vectorStore(vectorStore).build()
-        ).build();
+        )
+              .documentPostProcessors(PIIMaskingDocumentPostProcessor.builder())
+              .build();
     }
 }
