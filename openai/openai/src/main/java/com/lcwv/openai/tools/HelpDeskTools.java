@@ -20,17 +20,18 @@ public class HelpDeskTools {
     private final HelpDeskService helpDeskService;
 
     //ToolContext : its like session , can store info in it and can use it later during tool execution.
-     @Tool(name="createTicket",description = "Create the Support Ticket")
+     @Tool(name="createTicket",description = "Create the Support Ticket",returnDirect = true)
      String createTicket(@ToolParam(description = "Details to create a support ticket")
                          TicketRequest ticketRequest, ToolContext toolContext){
          String username = (String) toolContext.getContext().get("username");
          HelpDeskTicket ticket = helpDeskService.createTicket(ticketRequest, username);
-         return "Ticket# "+ticket.getId()+" created successfully for user "+ticket;
+         return "Ticket# "+ticket.getId()+" created successfully for user "+ticket.getUsername();
      }
 
     @Tool(name="getTicketStatus",description = "Fetch the status of the open ticket base on given username")
     List<HelpDeskTicket> getTicketStatus(ToolContext toolContext){
         String username = (String) toolContext.getContext().get("username");
+//        throw new RuntimeException("Unable to fetch Ticket status");
         return helpDeskService.getTicketsByUsername(username);
     }
 
