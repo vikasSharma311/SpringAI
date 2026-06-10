@@ -24,7 +24,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-@TestPropertySource(properties = {"spring.ai.openai.api.key=${OPENAI_API_KEY:test-key}",
+@TestPropertySource(properties = {
+		"spring.ai.openai.api-key=${OPENAI_API_KEY:test-key}",
 "logging.level.org.springframework.ai=DEBUG"})
 class EvaluatorsApplicationTests {
 	@Autowired

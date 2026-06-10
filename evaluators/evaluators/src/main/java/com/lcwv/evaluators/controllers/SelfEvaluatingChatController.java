@@ -8,10 +8,12 @@ import org.springframework.ai.evaluation.EvaluationRequest;
 import org.springframework.ai.evaluation.EvaluationResponse;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
+import org.springframework.retry.annotation.Recover;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.retry.annotation.Retryable;
 
 import java.io.IOException;
 import java.nio.charset.Charset;
@@ -54,7 +56,7 @@ public class SelfEvaluatingChatController {
                         .build();
     }
 
-
+    @Retryable(retryFor =  InvalidAnswerException.class,maxAttempts = 3)
     @GetMapping("/chat")
     public String chat(@RequestParam("message") String message) {
         String airesponse = chatClient.prompt().user(message)
@@ -76,5 +78,9 @@ public class SelfEvaluatingChatController {
         if (!evaluationResponse.isPass()){
             throw new InvalidAnswerException(message,answer);
         }
+    }
+    @Recover
+    public String recover(InvalidAnswerException invalidAnswerException){
+        return "I'm sorry , I couldn't answer your question. Please try rephrasing it.";
     }
 }
